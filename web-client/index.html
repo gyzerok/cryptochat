@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <title>Socket.IO chat</title>
+    <script src="/bower_components/underscore/underscore.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bignumber.js/bignumber.min.js"></script>
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/rsa.js"></script>
+    <script src="/app.js"></script>
+
+    <style>
+        #messages{
+            padding: 10px 0 0 10px;
+        }
+
+        .subm{
+            padding-right: 18px;
+        }
+        .butt{
+            margin: 0 auto;
+            position: relative;
+            width: 100%;
+        }
+        .secondrw{
+            margin-top: 10px;
+        }
+        #content{
+            margin-top: 20px;
+        }
+
+        .chatbody{
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            min-height: 200px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4"></div>
+        <div id="content" class="col-xs-4 well">
+            <div id="loginScreen">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <input id="loginInput" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="row secondrw">
+                    <div class="col-xs-4">
+                    </div>
+                    <div class="col-xs-4">
+                        <a id="loginBtn" class="btn btn-success butt">Войти</a>
+                    </div>
+                    <div class="col-xs-4">
+                    </div>
+                </div>
+            </div>
+
+            <div id="connectScreen" class="row" style="display:none">
+                <div class="col-xs-12">
+                    <h3>Creating RSA keys</h3>
+                </div>
+            </div>
+
+            <div id="chatScreen" class="container-fluid" style="display: none">
+                <div class="row chatbody">
+                    <div class="col-xs-12 msg "></div>
+
+                    <ul id="messages" class="list-unstyled"></ul>
+                </div>
+
+
+                    <form class="form-inline" role="form" action="">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <input class="form-control" id="m" autocomplete="off" />
+                            </div>
+                            <div class="col-xs-4">
+                                <button class="btn btn-primary subm" type="submit">Отправить</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#loginBtn').on('click', function () {
+        $('#loginScreen').css('display', 'none');
+        $('#connectScreen').css('display', '');
+        app.start($('#loginInput').val());
+        $('#connectScreen').css('display', 'none');
+        $('#chatScreen').css('display', '');
+    });
+</script>
+</body>
+</html>
