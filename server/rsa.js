@@ -1,7 +1,7 @@
 'use strict';
 
 var BigNumber = require('bignumber.js');
-var _ = require('underscore');
+var _ = require('lodash');
 
 var symbols = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.!? ';
 

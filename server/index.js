@@ -11,7 +11,7 @@ var rsa = require('./rsa');
 rsa.init(32);
 
 var BigNumber = require('bignumber.js');
-var _ = require('underscore');
+var _ = require('lodash');
 
 io.on('connection', function (socket) {
     socket.on('handshake', function (data) {
