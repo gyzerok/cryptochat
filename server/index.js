@@ -1,7 +1,5 @@
 'use strict';
 
-'use strict';
-
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -24,7 +22,7 @@ io.on('connection', function (socket) {
         socket.emit('handshake', {e: rsa.e.toString(), m: rsa.m.toString()});
     });
     socket.on('chat-message', function (data) {
-        var data = rsa.decrypt(data);
+        data = rsa.decrypt(data);
         _.each(io.sockets.sockets, function (nextSocket) {
             if (socket.id == nextSocket.id) return;
             var encyptedData = rsa.encrypt(data, nextSocket.rsa.e, nextSocket.rsa.m);
