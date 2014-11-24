@@ -6,10 +6,22 @@ global.app = app
 server = require('http').Server(app)
 io = require('socket.io').listen(server)
 
+global.Bacon = require('baconjs').Bacon
+
 app.use(express.static("#{__dirname}/../web-client/"))
 
-server.listen(1337, () ->
-  console.log('Listening on *:1337')
-)
+connections = Bacon.fromBinder (sink) ->
+  io.on('connection', sink)
 
-module.exports = app
+messages = connections.flatMap (socket) ->
+  Bacon.fromBinder (sink) ->
+    socket.on('chat-message', (msg) ->
+      sink
+        author: socket
+        msg: msg
+    )
+
+messages.onValue (val) ->
+  console.log(val.msg)
+
+module.exports = server

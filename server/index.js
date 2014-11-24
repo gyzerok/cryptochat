@@ -1,7 +1,9 @@
 'use strict';
 
 require('coffee-script/register');
-require('./app');
+require('./app').listen(1337, function () {
+    console.log('Listening on *:1337');
+});
 
 //var express = require('express');
 //var app = express();
